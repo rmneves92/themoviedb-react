@@ -6,10 +6,16 @@ export const Container = css`
 `;
 
 export const MoviesContainer = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 3;
+`;
+
+export const MoviesCards = css`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: auto;
-  grid-gap: 82px;
-
-  flex: 3;
+  grid-gap: 45px;
 `;

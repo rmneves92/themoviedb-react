@@ -13,7 +13,7 @@ export const Container = css`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 18px;
+    padding: 12px;
     cursor: pointer;
     width: 100%;
     &:hover {
@@ -29,5 +29,13 @@ export const Active = css`
 export const PageTitle = css`
   font-size: 36px;
   font-weight: 500;
-  padding: 18px;
+  padding: 18px 12px;
+`;
+
+export const ClearFilters = css`
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 2px 12px;
 `;

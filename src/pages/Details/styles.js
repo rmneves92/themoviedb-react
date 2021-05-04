@@ -67,3 +67,11 @@ export const Date = css`
     display: inline;
   }
 `;
+
+export const BackButton = css`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  align-self: flex-start;
+  margin-right: 24px;
+`;

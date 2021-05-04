@@ -150,7 +150,7 @@ export const GlobalStyle = (props) => (
       }
 
       main {
-        padding: 160px 20px 160px 0px;
+        padding: 50px 20px 160px 0px;
       }
 
       body {

@@ -11,16 +11,16 @@ function App() {
     <>
       <MovieProvider>
         <GlobalStyle />
-        <Header />
-        <main>
-          <BrowserRouter>
+        <BrowserRouter>
+          <Header />
+          <main>
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/details/:id" exact component={Details} />
               <Route render={() => <Redirect to="/" />} />
             </Switch>
-          </BrowserRouter>
-        </main>
+          </main>
+        </BrowserRouter>
       </MovieProvider>
     </>
   );

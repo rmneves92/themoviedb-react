@@ -5,6 +5,7 @@ import * as styles from "./styles";
 import { useFilter } from "../../context/movieContext";
 import MovieCard from "../../components/MovieCard";
 import Sidebar from "../../components/Sidebar";
+import Pagination from "../../components/Pagination";
 
 const apiKey = "b4bf9244e61c43cbd2bcbbcb2f7acafd";
 
@@ -12,6 +13,7 @@ const Home = (props) => {
   const history = useHistory();
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
+  const [page, setPage] = useState(1);
   const { filters, setFilters } = useFilter();
 
   useEffect(() => {
@@ -21,27 +23,18 @@ const Home = (props) => {
 
   useEffect(() => {
     loadMovies();
-  }, [filters]);
+  }, [filters, page]);
 
   const loadMovies = async () => {
     try {
       const response = await api.get(
-        `discover/movie?api_key=${apiKey}&language=pt-BR`
+        `discover/movie?api_key=${apiKey}&language=pt-BR&with_genres=${filters.toString()}&page=${page}`
       );
       if (!response.ok) throw new Error(`Fetch error: ${response.statusText}`);
 
       const json = await response.json();
 
-      const filtersId = filters.map((filter) => filter.id);
-      if (filters.length > 0) {
-        setMovies(
-          json.results.filter((movie) =>
-            movie.genre_ids.some((id) => filtersId.includes(id))
-          )
-        );
-      } else {
-        setMovies(json.results);
-      }
+      setMovies(json.results);
     } catch (err) {
       console.log(err);
     }
@@ -62,12 +55,11 @@ const Home = (props) => {
     }
   };
 
-  const filterByGenre = (genre) => () => {
-    console.log("filterByGenre", genre);
-    if (filters.includes(genre)) {
-      setFilters(filters.filter((f) => f !== genre));
+  const filterByGenre = (id) => () => {
+    if (filters.find((f) => f === id)) {
+      setFilters(filters.filter((f) => f !== id));
     } else {
-      setFilters([...filters, genre]);
+      setFilters([...filters, id]);
     }
   };
 
@@ -75,21 +67,26 @@ const Home = (props) => {
     history.push(`/details/${id}`);
   };
 
-  console.log({ genres, movies, filters });
+  // console.log({ genres, movies, filters });
 
   return (
-    <div css={styles.Container}>
-      <Sidebar genres={genres} handleClick={filterByGenre} />
+    <>
+      <div css={styles.Container}>
+        <Sidebar genres={genres} handleClick={filterByGenre} />
 
-      {movies.length === 0 && <span>Carregando...</span>}
+        {movies.length === 0 && <span>Carregando...</span>}
 
-      <section css={styles.MoviesContainer}>
-        {movies.length > 0 &&
-          movies.map((movie) => (
-            <MovieCard open={openDetails} {...movie} key={movie.id} />
-          ))}
-      </section>
-    </div>
+        <div css={styles.MoviesContainer}>
+          <Pagination changePage={setPage} page={page} />
+          <section css={styles.MoviesCards}>
+            {movies.length > 0 &&
+              movies.map((movie) => (
+                <MovieCard open={openDetails} {...movie} key={movie.id} />
+              ))}
+          </section>
+        </div>
+      </div>
+    </>
   );
 };
 

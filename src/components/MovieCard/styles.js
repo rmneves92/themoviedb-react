@@ -22,7 +22,7 @@ export const MovieImage = css`
 `;
 
 export const MovieInfo = css`
-  padding: 24px 0;
+  padding: 24px 10px;
   text-align: center;
   color: #fff;
 `;

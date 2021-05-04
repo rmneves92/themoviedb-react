@@ -3,19 +3,16 @@ import { useHistory, useParams } from "react-router-dom";
 import api from "../../services/api";
 import * as styles from "./styles";
 import moment from "moment";
-import { Star } from "react-feather";
+import { Star, ArrowLeft } from "react-feather";
 
 const apiKey = "b4bf9244e61c43cbd2bcbbcb2f7acafd";
 
 const Details = (props) => {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
-
-  console.log(movie);
+  const history = useHistory();
 
   useEffect(() => {
-    console.log("ID: ", id);
-
     loadMovieDetails(id);
   }, [id]);
 
@@ -34,52 +31,59 @@ const Details = (props) => {
     }
   };
 
-  console.log("movie.vote_average", movie.vote_average);
-
-  if (!movie) {
-    return;
-  }
-
   return (
     <section css={styles.Container}>
-      <div css={styles.PosterContainer}>
-        <img
-          src={
-            movie.poster_path &&
-            `http://image.tmdb.org/t/p/w300${movie.poster_path}`
-          }
-          alt={movie.title}
-          css={styles}
-        ></img>
-      </div>
+      <a css={styles.BackButton} onClick={() => history.push("/")}>
+        <ArrowLeft /> Voltar
+      </a>
 
-      <div css={styles.MovieDetails}>
-        <h2 css={styles.MovieTitle}>{movie.title}</h2>
-        <span css={styles.Tagline}>{movie.tagline}</span>
+      {!movie.title ? (
+        <span>Carregando...</span>
+      ) : (
+        <>
+          <div css={styles.PosterContainer}>
+            <img
+              src={
+                movie.poster_path &&
+                `http://image.tmdb.org/t/p/w300${movie.poster_path}`
+              }
+              alt={movie.title}
+              css={styles}
+            ></img>
+          </div>
 
-        <div css={styles.Score}>
-          <Star />
-          <span>
-            {movie.vote_average} <small>/10 ({movie.vote_count} votos) </small>
-          </span>
-        </div>
+          <div css={styles.MovieDetails}>
+            <h2 css={styles.MovieTitle}>{movie.title}</h2>
+            <span css={styles.Tagline}>{movie.tagline}</span>
 
-        <div>
-          {movie.genres &&
-            movie.genres.map((genre) => (
-              <span css={styles.TagGenre}>{genre.name}</span>
-            ))}
-        </div>
+            <div css={styles.Score}>
+              <Star color="gold" />
+              <span>
+                {movie.vote_average}{" "}
+                <small>/10 ({movie.vote_count} votos) </small>
+              </span>
+            </div>
 
-        <p css={styles.MovieOverview}>{movie.overview}</p>
+            <div>
+              {movie.genres &&
+                movie.genres.map((genre, index) => (
+                  <span key={index} css={styles.TagGenre}>
+                    {genre.name}
+                  </span>
+                ))}
+            </div>
 
-        <div css={styles.Date}>
-          <h2>Data de lançamento: </h2>
-          <span>
-            {moment(movie.release_date, "YYYY-MM-DD").format("DD/MM/YYYY")}
-          </span>
-        </div>
-      </div>
+            <p css={styles.MovieOverview}>{movie.overview}</p>
+
+            <div css={styles.Date}>
+              <h2>Data de lançamento: </h2>
+              <span>
+                {moment(movie.release_date, "YYYY-MM-DD").format("DD/MM/YYYY")}
+              </span>
+            </div>
+          </div>
+        </>
+      )}
     </section>
   );
 };
