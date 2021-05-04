@@ -4,6 +4,11 @@ export const MovieContainer = css`
   display: flex;
   flex-direction: column;
   cursor: pointer;
+
+  &:hover {
+    transition: all 0.3s ease 0s;
+    box-shadow: 0 0 2px 2px #fff, 0 0 22px 2px #0ff;
+  }
 `;
 
 export const MovieImage = css`
@@ -18,5 +23,6 @@ export const MovieImage = css`
 
 export const MovieInfo = css`
   padding: 24px 0;
+  text-align: center;
   color: #fff;
 `;

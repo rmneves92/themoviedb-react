@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 
 export const Container = css`
   display: flex;
+  color: #fff;
 `;
 
 export const MoviesContainer = css`

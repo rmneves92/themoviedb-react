@@ -11,6 +11,10 @@ const Sidebar = ({ genres, handleClick }) => {
 
   return (
     <div css={styles.Container}>
+      <h1 css={styles.PageTitle}>Filmes</h1>
+      <hr></hr>
+
+      {genres.length === 0 && <span>Carregando...</span>}
       <ul>
         {genres.map((genre, index) => (
           <li

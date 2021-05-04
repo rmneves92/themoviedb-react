@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import api from "../../services/api";
 import * as styles from "./styles";
 import { useFilter } from "../../context/movieContext";
-import moment from "moment";
 import MovieCard from "../../components/MovieCard";
 import Sidebar from "../../components/Sidebar";
 
@@ -57,11 +56,6 @@ const Home = (props) => {
 
       const json = await response.json();
 
-      // const genres = json.genres.map((genre) => ({
-      //   label: genre.name,
-      //   value: genre.id,
-      // }));
-
       setGenres(json.genres);
     } catch (err) {
       console.log(err);
@@ -83,29 +77,11 @@ const Home = (props) => {
 
   console.log({ genres, movies, filters });
 
-  // const customStyles = {
-  //   option: (provided, state) => ({
-  //     ...provided,
-  //     borderBottom: "1px dotted pink",
-  //     color: state.isSelected ? "red" : "blue",
-  //     padding: 20,
-  //   }),
-  //   container: (provided, state) => {
-  //     const width = 400;
-
-  //     return { ...provided, width };
-  //   },
-  //   singleValue: (provided, state) => {
-  //     const opacity = state.isDisabled ? 0.5 : 1;
-  //     const transition = "opacity 300ms";
-
-  //     return { ...provided, opacity, transition };
-  //   },
-  // };
-
   return (
     <div css={styles.Container}>
       <Sidebar genres={genres} handleClick={filterByGenre} />
+
+      {movies.length === 0 && <span>Carregando...</span>}
 
       <section css={styles.MoviesContainer}>
         {movies.length > 0 &&

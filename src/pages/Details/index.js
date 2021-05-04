@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import api from "../../services/api";
-import { css } from "@emotion/react";
+import * as styles from "./styles";
+import moment from "moment";
+import { Star } from "react-feather";
 
 const apiKey = "b4bf9244e61c43cbd2bcbbcb2f7acafd";
 
 const Details = (props) => {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
+
+  console.log(movie);
 
   useEffect(() => {
     console.log("ID: ", id);
@@ -24,24 +28,59 @@ const Details = (props) => {
 
       const json = await response.json();
 
-      console.log(json);
-
       setMovie(json);
     } catch (err) {
       console.log(err);
     }
   };
 
+  console.log("movie.vote_average", movie.vote_average);
+
+  if (!movie) {
+    return;
+  }
+
   return (
-    <div>
-      <h1>{movie.title}</h1>
-      {movie.backdrop_path && (
+    <section css={styles.Container}>
+      <div css={styles.PosterContainer}>
         <img
-          src={`http://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+          src={
+            movie.poster_path &&
+            `http://image.tmdb.org/t/p/w300${movie.poster_path}`
+          }
+          alt={movie.title}
+          css={styles}
         ></img>
-      )}
-      <p>{movie.overview}</p>
-    </div>
+      </div>
+
+      <div css={styles.MovieDetails}>
+        <h2 css={styles.MovieTitle}>{movie.title}</h2>
+        <span css={styles.Tagline}>{movie.tagline}</span>
+
+        <div css={styles.Score}>
+          <Star />
+          <span>
+            {movie.vote_average} <small>/10 ({movie.vote_count} votos) </small>
+          </span>
+        </div>
+
+        <div>
+          {movie.genres &&
+            movie.genres.map((genre) => (
+              <span css={styles.TagGenre}>{genre.name}</span>
+            ))}
+        </div>
+
+        <p css={styles.MovieOverview}>{movie.overview}</p>
+
+        <div css={styles.Date}>
+          <h2>Data de lançamento: </h2>
+          <span>
+            {moment(movie.release_date, "YYYY-MM-DD").format("DD/MM/YYYY")}
+          </span>
+        </div>
+      </div>
+    </section>
   );
 };
 
