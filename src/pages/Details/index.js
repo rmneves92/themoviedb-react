@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import api from "../../services/api";
 import * as styles from "./styles";
 import moment from "moment";
@@ -10,7 +10,6 @@ const apiKey = "b4bf9244e61c43cbd2bcbbcb2f7acafd";
 const Details = (props) => {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
-  // const history = useHistory();
 
   useEffect(() => {
     loadMovieDetails(id);
@@ -31,7 +30,6 @@ const Details = (props) => {
     }
   };
 
-  // console.log({ movie });
   return (
     <section css={styles.Container}>
       {!movie.title ? (

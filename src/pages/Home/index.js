@@ -64,8 +64,6 @@ const Home = (props) => {
     history.push(`/details/${id}`);
   };
 
-  // console.log({ genres, movies, filters });
-
   return (
     <>
       <div css={styles.Container}>

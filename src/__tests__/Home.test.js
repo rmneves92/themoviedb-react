@@ -1,12 +1,10 @@
 import React from "react";
 import Home from "../pages/Home";
-// import Sidebar from "../components/Sidebar";
 import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import userEvent from "@testing-library/user-event";
 import mockAxios from "axios";
 
-import MovieProvider, { useFilter } from "../context/movieContext";
+import MovieProvider from "../context/movieContext";
 const apiKey = "b4bf9244e61c43cbd2bcbbcb2f7acafd";
 
 const fakeGenres = [
