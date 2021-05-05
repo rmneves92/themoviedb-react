@@ -31,10 +31,18 @@ export const Active = css`
   background-color: #9f5e64;
 `;
 
+export const HeaderSidebar = css`
+  font-weight: 500;
+  padding: 18px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+`;
+
 export const PageTitle = css`
   font-size: 36px;
   font-weight: 500;
-  padding: 18px 12px;
+  margin-right: 24px;
 `;
 
 export const ClearFilters = css`

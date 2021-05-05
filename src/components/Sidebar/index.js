@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import * as styles from "./styles";
 import { useFilter, usePage } from "../../context/movieContext";
-import { Check, X } from "react-feather";
+import { Check, X, Filter } from "react-feather";
 import { Collapse } from "react-collapse";
 
 const Sidebar = ({ genres, handleClick }) => {
@@ -21,8 +21,9 @@ const Sidebar = ({ genres, handleClick }) => {
 
   return (
     <div css={styles.Container}>
-      <h1 css={styles.PageTitle} onClick={() => setIsOpened(!isOpened)}>
-        Filmes
+      <h1 css={styles.HeaderSidebar} onClick={() => setIsOpened(!isOpened)}>
+        <h1 css={styles.PageTitle}> Filmes</h1>
+        <Filter />
       </h1>
       {filters.length > 0 && (
         <span

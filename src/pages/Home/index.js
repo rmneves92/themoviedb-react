@@ -81,6 +81,10 @@ const Home = (props) => {
                 <MovieCard open={openDetails} {...movie} key={movie.id} />
               ))}
           </section>
+
+          {movies.length >= 20 && (
+            <Pagination changePage={setPage} page={page} />
+          )}
         </div>
       </div>
     </>
