@@ -4,9 +4,10 @@ const MovieContext = createContext();
 
 export default function MovieProvider({ children }) {
   const [filters, setFilters] = useState([]);
+  const [page, setPage] = useState(1);
 
   return (
-    <MovieContext.Provider value={{ filters, setFilters }}>
+    <MovieContext.Provider value={{ filters, setFilters, page, setPage }}>
       {children}
     </MovieContext.Provider>
   );
@@ -19,9 +20,9 @@ export const useFilter = () => {
   return { filters, setFilters };
 };
 
-// export const useMovie = () => {
-//   const context = useContext(MovieContext);
-//   const { user, setUser } = context;
+export const usePage = () => {
+  const context = useContext(MovieContext);
+  const { page, setPage } = context;
 
-//   return { user, setUser };
-// };
+  return { page, setPage };
+};

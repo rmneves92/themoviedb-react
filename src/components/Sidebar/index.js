@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import * as styles from "./styles";
-import { useFilter } from "../../context/movieContext";
+import { useFilter, usePage } from "../../context/movieContext";
 import { Check, X } from "react-feather";
 import { Collapse } from "react-collapse";
 
 const Sidebar = ({ genres, handleClick }) => {
   const { setFilters, filters } = useFilter();
+  const { setPage } = usePage();
   const [isOpened, setIsOpened] = useState(true);
 
   useEffect(() => {
@@ -24,7 +25,13 @@ const Sidebar = ({ genres, handleClick }) => {
         Filmes
       </h1>
       {filters.length > 0 && (
-        <span css={styles.ClearFilters} onClick={() => setFilters([])}>
+        <span
+          css={styles.ClearFilters}
+          onClick={() => {
+            setFilters([]);
+            setPage(1);
+          }}
+        >
           Limpar filtros <X size="20" />
         </span>
       )}

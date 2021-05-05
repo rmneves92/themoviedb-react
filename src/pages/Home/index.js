@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import api from "../../services/api";
 import * as styles from "./styles";
-import { useFilter } from "../../context/movieContext";
+import { useFilter, usePage } from "../../context/movieContext";
 import MovieCard from "../../components/MovieCard";
 import Sidebar from "../../components/Sidebar";
 import Pagination from "../../components/Pagination";
@@ -13,8 +13,8 @@ const Home = (props) => {
   const history = useHistory();
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
-  const [page, setPage] = useState(1);
   const { filters, setFilters } = useFilter();
+  const { page, setPage } = usePage();
 
   useEffect(() => {
     loadGenres();
@@ -71,10 +71,12 @@ const Home = (props) => {
       <div css={styles.Container}>
         <Sidebar genres={genres} handleClick={filterByGenre} />
 
-        {movies.length === 0 && <span>Carregando...</span>}
+        {movies.length === 0 && <span>Nenhum filme encontrado</span>}
 
         <div css={styles.MoviesContainer}>
-          <Pagination changePage={setPage} page={page} />
+          {movies.length >= 20 && (
+            <Pagination changePage={setPage} page={page} />
+          )}
           <section css={styles.MoviesCards}>
             {movies.length > 0 &&
               movies.map((movie) => (

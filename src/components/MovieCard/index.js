@@ -2,15 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as styles from "./styles";
 
-const MovieCard = ({ id, title, poster_path, open }) => {
+const MovieCard = ({ open, id, backdrop_path, poster_path, title }) => {
   return (
     <div data-testid="movie-item">
       <div css={styles.MovieContainer} onClick={() => open(id)}>
-        <img
-          css={styles.MovieImage}
-          src={`http://image.tmdb.org/t/p/w500${poster_path}`}
-          alt={title}
-        ></img>
+        {(poster_path || backdrop_path) && (
+          <img
+            css={styles.MovieImage}
+            src={`http://image.tmdb.org/t/p/w500${
+              poster_path || backdrop_path
+            }`}
+            alt={title}
+          ></img>
+        )}
         <div css={styles.MovieInfo}>
           <h3>{title}</h3>
         </div>

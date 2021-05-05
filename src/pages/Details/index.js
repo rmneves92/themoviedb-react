@@ -39,14 +39,16 @@ const Details = (props) => {
       ) : (
         <>
           <div css={styles.PosterContainer}>
-            <img
-              src={
-                movie.poster_path &&
-                `http://image.tmdb.org/t/p/w300${movie.poster_path}`
-              }
-              alt={movie.title}
-              css={styles}
-            ></img>
+            {movie.poster_path && (
+              <img
+                src={
+                  movie.poster_path &&
+                  `http://image.tmdb.org/t/p/w300${movie.poster_path}`
+                }
+                alt={movie.title}
+                css={styles}
+              ></img>
+            )}
           </div>
 
           <div css={styles.MovieDetails}>
