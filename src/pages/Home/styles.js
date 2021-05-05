@@ -5,7 +5,7 @@ export const Container = css`
   flex-wrap: wrap;
   color: #fff;
 
-  @media (max-width: 900px) {
+  @media (max-width: 640px) {
     flex-direction: column;
   }
 `;
@@ -24,7 +24,7 @@ export const MoviesCards = css`
   grid-auto-rows: auto;
   grid-gap: 45px;
 
-  @media (max-width: 900px) {
-    grid-template-columns: repeat(1, 1fr);
+  @media (max-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
