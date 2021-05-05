@@ -2,6 +2,8 @@
 
 Application developed with ReactJS integrated with the TMDB API.
 
+URL: (https://laughing-euler-703d01.netlify.app)
+
 ## Installation
 
 1. cd `tmdb-react` to go into the project root
