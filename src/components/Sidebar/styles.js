@@ -1,13 +1,18 @@
 import { css } from "@emotion/react";
 
 export const Container = css`
-  margin-right: 20px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  width: 600px;
+  ${"" /* width: 600px; */}
   color: #fff;
   background-color: #1f2b3f;
   flex: 1;
   height: 100%;
+  margin-right: 20px;
+  margin-bottom: 40px;
+
+  @media (max-width: 640px) {
+    margin-right: 0;
+  }
 
   li {
     display: flex;

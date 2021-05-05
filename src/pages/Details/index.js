@@ -46,7 +46,7 @@ const Details = (props) => {
                   `http://image.tmdb.org/t/p/w300${movie.poster_path}`
                 }
                 alt={movie.title}
-                css={styles}
+                css={styles.Poster}
               ></img>
             )}
           </div>

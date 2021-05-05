@@ -4,6 +4,10 @@ export const Container = css`
   display: flex;
   flex-wrap: wrap;
   color: #fff;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+  }
 `;
 
 export const MoviesContainer = css`
@@ -19,4 +23,8 @@ export const MoviesCards = css`
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: auto;
   grid-gap: 45px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;

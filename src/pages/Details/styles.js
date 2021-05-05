@@ -15,16 +15,22 @@ export const PosterContainer = css`
   height: 100%;
 `;
 
-export const Poster = css``;
+export const Poster = css`
+  margin-bottom: 24px;
+`;
 
 export const MovieDetails = css`
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 100%;
   margin-left: 36px;
 
   > * {
     margin-bottom: 20px;
+  }
+
+  @media (min-width: 640px) {
+    width: 50%;
   }
 `;
 
