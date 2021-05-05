@@ -4,7 +4,7 @@ import * as styles from "./styles";
 
 const MovieCard = ({ id, title, poster_path, open }) => {
   return (
-    <div>
+    <div data-testid="movie-item">
       <div css={styles.MovieContainer} onClick={() => open(id)}>
         <img
           css={styles.MovieImage}

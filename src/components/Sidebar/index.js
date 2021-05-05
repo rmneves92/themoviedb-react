@@ -25,6 +25,7 @@ const Sidebar = ({ genres, handleClick }) => {
         {genres.map((genre, index) => {
           return (
             <li
+              data-testid="genre-item"
               key={index}
               onClick={handleClick(genre.id)}
               css={isActive(genre) ? styles.Active : null}

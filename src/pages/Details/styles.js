@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-export const Container = (props) => css`
+export const Container = css`
   display: flex;
   justify-content: center;
   color: #fff;

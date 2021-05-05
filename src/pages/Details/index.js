@@ -16,26 +16,27 @@ const Details = (props) => {
     loadMovieDetails(id);
   }, [id]);
 
-  const loadMovieDetails = async (id) => {
+  const loadMovieDetails = (id) => {
     try {
-      const response = await api.get(
-        `movie/${id}?api_key=${apiKey}&language=pt-BR&append_to_response=images&include_image_language=en,null`
-      );
-      if (!response.ok) throw new Error(`Fetch error: ${response.statusText}`);
-
-      const json = await response.json();
-
-      setMovie(json);
+      api
+        .get(
+          `movie/${id}?api_key=${apiKey}&language=pt-BR&append_to_response=images&include_image_language=en,null`
+        )
+        .then((res) => setMovie(res.data))
+        .catch((err) => {
+          console.error(err);
+        });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
+  // console.log({ movie });
   return (
     <section css={styles.Container}>
-      <a css={styles.BackButton} onClick={() => history.push("/")}>
+      <span css={styles.BackButton} onClick={() => history.push("/")}>
         <ArrowLeft /> Voltar
-      </a>
+      </span>
 
       {!movie.title ? (
         <span>Carregando...</span>
@@ -53,7 +54,9 @@ const Details = (props) => {
           </div>
 
           <div css={styles.MovieDetails}>
-            <h2 css={styles.MovieTitle}>{movie.title}</h2>
+            <h2 data-testid="movie-title" css={styles.MovieTitle}>
+              {movie.title}
+            </h2>
             <span css={styles.Tagline}>{movie.tagline}</span>
 
             <div css={styles.Score}>

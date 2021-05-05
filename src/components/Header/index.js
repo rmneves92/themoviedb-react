@@ -11,9 +11,9 @@ const Header = (props) => {
       <nav css={styles.Nav}>
         <ul css={styles.Links}>
           <li>
-            <a css={styles.Logo} onClick={() => history.push("/")}>
+            <span css={styles.Logo} onClick={() => history.push("/")}>
               <Film />
-            </a>
+            </span>
           </li>
           <li>
             <a

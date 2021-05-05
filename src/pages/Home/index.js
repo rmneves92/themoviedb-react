@@ -17,7 +17,6 @@ const Home = (props) => {
   const { filters, setFilters } = useFilter();
 
   useEffect(() => {
-    loadMovies();
     loadGenres();
   }, []);
 
@@ -25,33 +24,31 @@ const Home = (props) => {
     loadMovies();
   }, [filters, page]);
 
-  const loadMovies = async () => {
+  const loadMovies = () => {
     try {
-      const response = await api.get(
-        `discover/movie?api_key=${apiKey}&language=pt-BR&with_genres=${filters.toString()}&page=${page}`
-      );
-      if (!response.ok) throw new Error(`Fetch error: ${response.statusText}`);
-
-      const json = await response.json();
-
-      setMovies(json.results);
+      api
+        .get(
+          `discover/movie?api_key=${apiKey}&language=pt-BR&with_genres=${filters.toString()}&page=${page}`
+        )
+        .then((res) => setMovies(res.data.results))
+        .catch((err) => {
+          console.error(err);
+        });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
-  const loadGenres = async () => {
+  const loadGenres = () => {
     try {
-      const response = await api.get(
-        `genre/movie/list?api_key=${apiKey}&language=pt-BR`
-      );
-      if (!response.ok) throw new Error(`Fetch error: ${response.statusText}`);
-
-      const json = await response.json();
-
-      setGenres(json.genres);
+      api
+        .get(`genre/movie/list?api_key=${apiKey}&language=pt-BR`)
+        .then((res) => setGenres(res.data.genres))
+        .catch((err) => {
+          console.error(err);
+        });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
