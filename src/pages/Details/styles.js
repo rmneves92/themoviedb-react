@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 export const Container = css`
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   color: #fff;
 
   h2 {
@@ -46,6 +47,7 @@ export const TagGenre = css`
   border-radius: 20px;
   padding: 5px 10px;
   margin-right: 8px;
+  margin-top: 8px;
 `;
 
 export const Score = css`
@@ -62,7 +64,7 @@ export const Score = css`
   }
 `;
 
-export const Date = css`
+export const ReleaseDate = css`
   > * {
     display: inline;
   }
@@ -74,4 +76,11 @@ export const BackButton = css`
   cursor: pointer;
   align-self: flex-start;
   margin-right: 24px;
+`;
+
+export const TagContainer = css`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 `;

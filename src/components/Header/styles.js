@@ -37,5 +37,9 @@ export const Links = css`
   a {
     color: #fff;
     text-decoration: none;
+
+    @media (max-width: 640px) {
+      display: none;
+    }
   }
 `;

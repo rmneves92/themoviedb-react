@@ -3,14 +3,14 @@ import { useHistory, useParams } from "react-router-dom";
 import api from "../../services/api";
 import * as styles from "./styles";
 import moment from "moment";
-import { Star, ArrowLeft } from "react-feather";
+import { Star } from "react-feather";
 
 const apiKey = "b4bf9244e61c43cbd2bcbbcb2f7acafd";
 
 const Details = (props) => {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
-  const history = useHistory();
+  // const history = useHistory();
 
   useEffect(() => {
     loadMovieDetails(id);
@@ -34,10 +34,6 @@ const Details = (props) => {
   // console.log({ movie });
   return (
     <section css={styles.Container}>
-      <span css={styles.BackButton} onClick={() => history.push("/")}>
-        <ArrowLeft /> Voltar
-      </span>
-
       {!movie.title ? (
         <span>Carregando...</span>
       ) : (
@@ -67,7 +63,7 @@ const Details = (props) => {
               </span>
             </div>
 
-            <div>
+            <div css={styles.TagContainer}>
               {movie.genres &&
                 movie.genres.map((genre, index) => (
                   <span key={index} css={styles.TagGenre}>
@@ -78,7 +74,7 @@ const Details = (props) => {
 
             <p css={styles.MovieOverview}>{movie.overview}</p>
 
-            <div css={styles.Date}>
+            <div css={styles.ReleaseDate}>
               <h2>Data de lançamento: </h2>
               <span>
                 {moment(movie.release_date, "YYYY-MM-DD").format("DD/MM/YYYY")}
