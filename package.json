@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "customize-cra": "^1.0.0",
     "dotenv": "^8.2.0",
+    "framer-motion": "^4.1.13",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-app-rewired": "^2.1.8",

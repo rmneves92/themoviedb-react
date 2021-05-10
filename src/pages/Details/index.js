@@ -4,8 +4,8 @@ import api from "../../services/api";
 import * as styles from "./styles";
 import moment from "moment";
 import { Star } from "react-feather";
-
-const apiKey = "b4bf9244e61c43cbd2bcbbcb2f7acafd";
+import { motion } from "framer-motion";
+import { animationOne, transition } from "../../animations";
 
 const Details = (props) => {
   const { id } = useParams();
@@ -19,7 +19,7 @@ const Details = (props) => {
     try {
       api
         .get(
-          `movie/${id}?api_key=${apiKey}&language=pt-BR&append_to_response=images&include_image_language=en,null`
+          `movie/${id}?language=pt-BR&append_to_response=images&include_image_language=en,null`
         )
         .then((res) => setMovie(res.data))
         .catch((err) => {
@@ -31,7 +31,14 @@ const Details = (props) => {
   };
 
   return (
-    <section css={styles.Container}>
+    <motion.section
+      initial="out"
+      animate="in"
+      exit="out"
+      variants={animationOne}
+      transition={transition}
+      css={styles.Container}
+    >
       {!movie.title ? (
         <span>Carregando...</span>
       ) : (
@@ -83,7 +90,7 @@ const Details = (props) => {
           </div>
         </>
       )}
-    </section>
+    </motion.section>
   );
 };
 

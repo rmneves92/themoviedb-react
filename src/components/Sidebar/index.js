@@ -4,6 +4,7 @@ import * as styles from "./styles";
 import { useFilter, usePage } from "../../context/movieContext";
 import { Check, X, Filter } from "react-feather";
 import { Collapse } from "react-collapse";
+import { motion } from "framer-motion";
 
 const Sidebar = ({ genres, handleClick }) => {
   const { setFilters, filters } = useFilter();
@@ -20,11 +21,21 @@ const Sidebar = ({ genres, handleClick }) => {
     filters.includes(filters.find((el) => el === genre.id));
 
   return (
-    <div css={styles.Container}>
-      <h1 css={styles.HeaderSidebar} onClick={() => setIsOpened(!isOpened)}>
+    <motion.div
+      initial={{ x: "-100%" }}
+      animate={{
+        x: 0,
+      }}
+      exit={{
+        x: "100%",
+      }}
+      transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+      css={styles.Container}
+    >
+      <div css={styles.HeaderSidebar} onClick={() => setIsOpened(!isOpened)}>
         <h1 css={styles.PageTitle}> Filmes</h1>
         <Filter />
-      </h1>
+      </div>
       {filters.length > 0 && (
         <span
           css={styles.ClearFilters}
@@ -57,7 +68,7 @@ const Sidebar = ({ genres, handleClick }) => {
           })}
         </ul>
       </Collapse>
-    </div>
+    </motion.div>
   );
 };
 

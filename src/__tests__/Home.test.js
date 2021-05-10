@@ -54,9 +54,9 @@ describe("Home Page", () => {
   it("should call axios and return categories and movies without errors", async () => {
     mockAxios.get.mockImplementation((url) => {
       switch (url) {
-        case `discover/movie?api_key=${apiKey}&language=pt-BR&with_genres=&page=1`:
+        case `discover/movie?language=pt-BR&with_genres=&page=1`:
           return Promise.resolve({ data: { results: fakeMovies } });
-        case `genre/movie/list?api_key=${apiKey}&language=pt-BR`:
+        case `genre/movie/list?language=pt-BR`:
           return Promise.resolve({ data: { genres: fakeGenres } });
         default:
           return Promise.reject(new Error("not found"));
@@ -71,11 +71,11 @@ describe("Home Page", () => {
 
     expect(mockAxios.get).toHaveBeenCalledTimes(2);
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `discover/movie?api_key=${apiKey}&language=pt-BR&with_genres=&page=1`
+      `discover/movie?language=pt-BR&with_genres=&page=1`
     );
 
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `genre/movie/list?api_key=${apiKey}&language=pt-BR`
+      `genre/movie/list?language=pt-BR`
     );
 
     await waitFor(() => {

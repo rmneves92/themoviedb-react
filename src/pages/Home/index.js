@@ -7,8 +7,6 @@ import MovieCard from "../../components/MovieCard";
 import Sidebar from "../../components/Sidebar";
 import Pagination from "../../components/Pagination";
 
-const apiKey = "b4bf9244e61c43cbd2bcbbcb2f7acafd";
-
 const Home = (props) => {
   const history = useHistory();
   const [movies, setMovies] = useState([]);
@@ -28,7 +26,7 @@ const Home = (props) => {
     try {
       api
         .get(
-          `discover/movie?api_key=${apiKey}&language=pt-BR&with_genres=${filters.toString()}&page=${page}`
+          `discover/movie?language=pt-BR&with_genres=${filters.toString()}&page=${page}`
         )
         .then((res) => setMovies(res.data.results))
         .catch((err) => {
@@ -42,7 +40,7 @@ const Home = (props) => {
   const loadGenres = () => {
     try {
       api
-        .get(`genre/movie/list?api_key=${apiKey}&language=pt-BR`)
+        .get(`genre/movie/list?language=pt-BR`)
         .then((res) => setGenres(res.data.genres))
         .catch((err) => {
           console.error(err);
@@ -68,8 +66,6 @@ const Home = (props) => {
     <>
       <div css={styles.Container}>
         <Sidebar genres={genres} handleClick={filterByGenre} />
-
-        {movies.length === 0 && <span>Nenhum filme encontrado</span>}
 
         <div css={styles.MoviesContainer}>
           {movies.length >= 20 && (

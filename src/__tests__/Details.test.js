@@ -46,7 +46,7 @@ describe("Details Page", () => {
   it("should display movie details without errors", async () => {
     mockAxios.get.mockImplementation((url) => {
       switch (url) {
-        case `movie/460465?api_key=${apiKey}&language=pt-BR&append_to_response=images&include_image_language=en,null`:
+        case `movie/460465?language=pt-BR&append_to_response=images&include_image_language=en,null`:
           return Promise.resolve({ data: fakeMovie });
 
         default:
@@ -62,7 +62,7 @@ describe("Details Page", () => {
 
     expect(mockAxios.get).toHaveBeenCalledTimes(1);
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `movie/460465?api_key=${apiKey}&language=pt-BR&append_to_response=images&include_image_language=en,null`
+      `movie/460465?language=pt-BR&append_to_response=images&include_image_language=en,null`
     );
 
     await waitFor(() => {
