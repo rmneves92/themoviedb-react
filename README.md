@@ -1,4 +1,4 @@
-# Carguero Fronted Challenge - TMDB
+# TMDB-React
 
 Application developed with ReactJS integrated with the TMDB API.
 
