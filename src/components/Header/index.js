@@ -33,16 +33,7 @@ const Header = (props) => {
               Documentação TMDB
             </a>
           </li>
-          <li>
-            <a
-              href="https://github.com/carguero/frontend-challenge"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Desafio
-            </a>
-          </li>
-
+         
           <li>
             <a
               href="https://github.com/rmneves92"
